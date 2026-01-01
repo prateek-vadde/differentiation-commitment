@@ -769,6 +769,16 @@ All statistical conclusions were based on effect sizes with empirically-derived 
 \paragraph{Computational implementation.} All analyses were implemented in Python. Key dependencies included Scanpy \citep{wolf2018} for single-cell preprocessing, POT \citep{flamary2021} for optimal transport, PyTorch \citep{paszke2019} for neural network training, and scikit-learn \citep{pedregosa2011} for statistical utilities. Numerical computations used NumPy \citep{harris2020} and SciPy \citep{virtanen2020}. GPU acceleration via CuPy \citep{okuta2017} was used for cost matrix computation, $k$-NN search, and neural network training.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Data and Code Availability
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Data and Code Availability}
+
+All code for this study is publicly available at \url{https://github.com/prateek-vadde/differentiation-commitment}. The repository includes complete implementations for transition inference, commitment score computation, perturbation analysis, and figure generation.
+
+Single-cell RNA sequencing data were obtained from published sources: mouse gastrulation data from \citet{pijuansala2019} and zebrafish embryogenesis data from \citet{wagner2018}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % References
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
