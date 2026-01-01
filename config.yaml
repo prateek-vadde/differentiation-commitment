@@ -1,0 +1,136 @@
+# COMPLETE DETERMINISTIC PLAN - CONFIG
+# All parameters are FIXED by rule or derived mechanically from data
+# NO TUNING ALLOWED
+
+# ============================================================================
+# II. DATASETS
+# ============================================================================
+datasets:
+  mouse:
+    name: "mouse_gastrulation"
+    description: "Mouse whole-embryo gastrulation E6.5-E8.5 (Pijuan-Sala et al.)"
+    min_timepoints: 4
+    min_cells_per_timepoint: 3000  # Actual data: 3.7K-22K per timepoint
+    timepoint_column: "stage"  # column name in meta.tab
+    exclude_timepoints: ["mixed_gastrulation"]  # Non-real timepoint
+
+  zebrafish:
+    name: "zebrafish_embryogenesis"
+    description: "Zebrafish embryogenesis (Farrell/URD, Wagner et al. Science 2018)"
+    min_timepoints: 4
+    min_cells_per_timepoint: 3000  # Actual data: 3.5K-35K per timepoint
+    timepoint_column: "TimeID"  # column name in obs
+
+# ============================================================================
+# III. REPRESENTATION (NO FLEXIBILITY)
+# ============================================================================
+preprocessing:
+  # QC filter (FIXED)
+  min_genes: 500
+  min_cells_per_gene: 10
+
+  # Normalization (FIXED)
+  normalize_to: 10000
+  log_transform: true
+
+  # Feature selection (FIXED)
+  n_hvgs: 3000
+
+  # Dimensionality reduction (FIXED)
+  n_pca: 50
+  pca_key: "X_pca"
+
+  # kNN graph (FIXED)
+  k_neighbors: 30
+
+# ============================================================================
+# V. CONSTRAINT EXPERTS (FULLY SPECIFIED)
+# ============================================================================
+experts:
+  # V.1 Global growth expert - computed from data
+  global:
+    enabled: true
+
+  # V.2 Cell-cycle expert - canonical gene lists
+  cycle:
+    enabled: true
+    method: "scanpy"  # Scanpy-style S/G2M scoring
+
+  # V.3 Velocity expert - deterministic fallback
+  velocity:
+    enabled: true
+    fallback_value: 1.0  # if spliced/unspliced not available
+
+  # V.4 Crowding expert - NO α/β, rank-based
+  crowding:
+    enabled: true
+    k_neighbors: 30  # for local density
+    use_percentile_ranks: true  # CRITICAL - removes scale dependence
+
+  # V.5 Final normalization (MANDATORY)
+  normalization:
+    target_median: 1.0
+
+# ============================================================================
+# VI. UNBALANCED OPTIMAL TRANSPORT (FIXED)
+# ============================================================================
+uot:
+  # Cost matrix - Euclidean squared in PCA space
+  cost_metric: "euclidean_squared"
+
+  # UOT hyperparameters (FIXED, NEVER TUNED)
+  epsilon_scale: 0.05  # multiplied by median(c)
+  lambda_s: 1.0
+  lambda_t: 1.0
+
+  # Solver
+  solver: "sinkhorn"
+  max_iter: 1000
+  tol: 1.0e-9
+
+# ============================================================================
+# VII. Φ DEFINITIONS (REPEATABLE)
+# ============================================================================
+phi:
+  # Shared parameter
+  k_neighbors: 30
+
+  # Φ₃ (Reachability) - entropy of T(x,·)
+  phi3:
+    method: "entropy"
+
+  # Φ₂ (Stability) - log trace ratio of covariances
+  phi2:
+    method: "trace_ratio"
+    covariance_type: "pca"
+
+  # Φ₁ (Propagation compatibility) - global vs local reachable diversity
+  phi1:
+    method: "diversity_difference"
+
+# ============================================================================
+# VIII. LOCKING SURFACE IDENTIFICATION (FIXED)
+# ============================================================================
+locking:
+  # Near-deterministic region thresholds (percentile-based, not tuned)
+  phi3_percentile: 25  # below 25th percentile
+  phi2_threshold: 0.0  # Φ₂ > 0
+
+  # Locking surface detection
+  gradient_method: "neighbor_differences"
+  min_timepoints_persistent: 2
+
+# ============================================================================
+# OUTPUT
+# ============================================================================
+output:
+  save_intermediate: true
+  save_figures: true
+  summary_report: "results/summary_report.md"
+
+# ============================================================================
+# VALIDATION
+# ============================================================================
+validation:
+  run_zebrafish: true
+  allow_parameter_changes: false  # NO RETUNING for validation

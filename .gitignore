@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files (too large for git)
+*.h5ad
+*.npz
+*.npy
+*.pkl
+*.pickle
+
+# Results and models (regenerable)
+phase1/results/
+phase1/data_proc/
+phase2/data_phase1/
+phase2/data_phase2A/
+phase2/results_p2b/
+phase2/models/
+
+# LaTeX auxiliary files
+*.aux
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (if any)
+node_modules/

@@ -1,0 +1,43 @@
+{
+  "seed": 0,
+
+  "pca_dim": 50,
+  "embed_dim": 64,
+  "mlp_hidden": 256,
+  "mlp_layers": 2,
+  "activation": "gelu",
+  "layernorm": true,
+  "dropout": 0.0,
+  "temperature_tau": 0.1,
+
+  "positives_per_source": 4,
+
+  "negatives_uniform_ratio": 0.5,
+  "hard_negative_pool": 4096,
+
+  "negatives_gpu": 2048,
+  "negatives_cpu": 512,
+
+  "topM_gpu": 6144,
+  "topM_cpu": 512,
+
+  "batch_gpu": 256,
+  "batch_cpu": 128,
+
+  "epochs": 100,
+  "lr": 1e-3,
+  "weight_decay": 1e-4,
+  "grad_clip": 1.0,
+
+  "loss_w_phi3": 0.25,
+  "loss_w_lock": 0.25,
+
+  "split_train": 0.80,
+  "split_val": 0.10,
+  "split_test": 0.10,
+
+  "pass_mass_capture": 0.90,
+  "pass_spearman_phi3": 0.80,
+  "pass_lock_auroc": 0.80,
+  "pass_lock_jaccard": 0.50
+}

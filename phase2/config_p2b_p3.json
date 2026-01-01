@@ -1,0 +1,47 @@
+{
+  "seed": 0,
+
+  "horizons": [1, 2, 3],
+  "horizon_weights": "inverse_h",
+
+  "entropy_log_base": "e",
+
+  "knn_k_gradient": 50,
+  "eps_scale_knn": 10,
+
+  "num_permutations": 10000,
+  "num_bootstrap": 2000,
+
+  "split_by_pairs": {
+    "train_frac": 0.7,
+    "val_frac": 0.15,
+    "test_frac": 0.15
+  },
+
+  "regressor": {
+    "use_regressor": true,
+    "input": "X_pca",
+    "mlp_hidden": 256,
+    "mlp_layers": 2,
+    "activation": "gelu",
+    "layernorm": true,
+    "dropout": 0.0,
+    "epochs": 30,
+    "batch_size": 1024,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0
+  },
+
+  "perturb": {
+    "num_cells_sample_per_pair": 5000,
+    "num_null_per_cell": 5,
+    "families": ["local_random", "directional_downC", "directional_upC"],
+    "evaluate_deciles": 10
+  },
+
+  "numerical_tolerance": {
+    "row_sum_atol": 0.00001,
+    "min_prob_clip": 1e-12
+  }
+}

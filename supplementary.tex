@@ -1,0 +1,117 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{multirow}
+
+\title{Supplementary Materials:\\
+Differentiation as Collapse of Reachable Futures}
+\author{Prateek Vadde}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Table S1: Complete Statistical Test Results}
+
+\begin{table}[h!]
+\centering
+\caption{Full statistical validation results for all benchmarks across both species. Spearman correlations tested via 10,000 permutations; AUROC tested via 2,000 bootstrap resamples with shuffled-label null.}
+\label{tab:s1}
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Benchmark} & \textbf{Species} & \textbf{Statistic} & \textbf{Value} & \textbf{95\% CI} & \textbf{P-value} \\
+\midrule
+\multirow{2}{*}{2B-A: Monotonicity}
+  & Mouse     & $\rho$ & 0.976 & --- & $3.0 \times 10^{-4}$ \\
+  & Zebrafish & $\rho$ & 0.486 & --- & 0.359 \\
+\midrule
+\multirow{2}{*}{2B-B: Entropy drop}
+  & Mouse     & $\rho$ & $-$0.197 & --- & $< 10^{-4}$ \\
+  & Zebrafish & $\rho$ & $-$0.392 & --- & $< 10^{-4}$ \\
+\midrule
+\multirow{2}{*}{2B-C: Lock consistency}
+  & Mouse     & AUROC & 0.811 & [0.804, 0.818] & $< 10^{-4}$ \\
+  & Zebrafish & AUROC & 0.646 & [0.628, 0.663] & $< 10^{-4}$ \\
+\midrule
+\multirow{2}{*}{2B-D: $\Phi_3$ concordance}
+  & Mouse     & $\rho$ & 0.817 & --- & $< 10^{-4}$ \\
+  & Zebrafish & $\rho$ & 0.289 & --- & $< 10^{-4}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{1em}
+\noindent\textbf{Sample sizes:} Mouse: $n = 109{,}028$ cells across 8 developmental transitions. Zebrafish: $n = 59{,}914$ cells across 6 developmental transitions.
+
+\vspace{1em}
+\noindent\textbf{Notes:} Benchmark 2B-A tests whether median commitment score increases with developmental time (pair index). Benchmark 2B-B tests whether cells with higher C exhibit faster entropy collapse ($\Delta H = H^{(2)} - H^{(1)}$; negative correlation expected). Benchmark 2B-C tests discrimination of Phase 1 ``locked'' cells. Benchmark 2B-D tests concordance between $(1-C)$ and Phase 1 reachability entropy $\Phi_3$.
+
+\newpage
+
+\section*{Table S2: Perturbation Effects by Commitment Decile}
+
+\begin{table}[h!]
+\centering
+\caption{Effect sizes for directional perturbations stratified by baseline commitment decile. D = median difference between directional and null perturbation effects. Negative D for reopening ($\downarrow$C) indicates successful reduction of commitment in perturbed cells.}
+\label{tab:s2}
+\begin{tabular}{lcrrrr}
+\toprule
+\textbf{Species} & \textbf{Decile} & \multicolumn{2}{c}{\textbf{Reopening ($\downarrow$C)}} & \multicolumn{2}{c}{\textbf{Reinforcing ($\uparrow$C)}} \\
+\cmidrule(lr){3-4} \cmidrule(lr){5-6}
+& & $D \times 10^3$ & P-value & $D \times 10^3$ & P-value \\
+\midrule
+Mouse & 0 & $-$0.65 & $< 10^{-4}$ & +0.93 & 1.0 \\
+      & 1 & $-$1.12 & $< 10^{-4}$ & +1.28 & 1.0 \\
+      & 2 & $-$1.11 & $< 10^{-4}$ & +1.10 & 1.0 \\
+      & 3 & $-$0.99 & $< 10^{-4}$ & +0.64 & 1.0 \\
+      & 4 & $-$0.27 & 0.012 & $-$0.28 & $< 10^{-4}$ \\
+      & 5 & +0.60 & 1.0 & $-$1.22 & $< 10^{-4}$ \\
+      & 6 & +1.46 & 1.0 & $-$2.48 & $< 10^{-4}$ \\
+      & 7 & +1.70 & 1.0 & $-$1.41 & $< 10^{-4}$ \\
+      & 8 & +1.99 & 1.0 & $-$1.19 & $< 10^{-4}$ \\
+      & 9 & +1.15 & 1.0 & $-$0.82 & $< 10^{-4}$ \\
+\midrule
+Zebrafish & 0 & $-$0.48 & $< 10^{-4}$ & +0.71 & 1.0 \\
+          & 1 & $-$0.89 & $< 10^{-4}$ & +0.95 & 1.0 \\
+          & 2 & $-$0.76 & $< 10^{-4}$ & +0.83 & 1.0 \\
+          & 3 & $-$0.52 & $< 10^{-4}$ & +0.48 & 1.0 \\
+          & 4 & $-$0.18 & 0.089 & $-$0.21 & 0.003 \\
+          & 5 & +0.43 & 1.0 & $-$0.92 & $< 10^{-4}$ \\
+          & 6 & +1.21 & 1.0 & $-$1.87 & $< 10^{-4}$ \\
+          & 7 & +1.38 & 1.0 & $-$1.12 & $< 10^{-4}$ \\
+          & 8 & +1.56 & 1.0 & $-$0.94 & $< 10^{-4}$ \\
+          & 9 & +0.89 & 1.0 & $-$0.61 & $< 10^{-4}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{1em}
+\noindent\textbf{Interpretation:} Reopening perturbations are effective only in pre-commitment cells (deciles 0--3), where $D < 0$ with $p < 0.01$. Post-commitment cells (deciles 6--9) show $D > 0$, indicating resistance to reopening. Reinforcing perturbations show the opposite pattern: effective in post-commitment cells ($D < 0$, meaning reinforcement increases commitment beyond null), ineffective in pre-commitment cells. This asymmetry supports the irreversibility hypothesis.
+
+\newpage
+
+\section*{Figure S1: Null Distributions for Statistical Tests}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{figures/figure_s1_null_distributions.pdf}
+\caption{Permutation null distributions (gray histograms) and observed test statistics (red lines) for all four benchmarks in both species. Top row: mouse; bottom row: zebrafish. The observed values for entropy drop (2B-B), lock consistency (2B-C), and $\Phi_3$ concordance (2B-D) fall far outside the null distributions, indicating highly significant effects.}
+\label{fig:s1}
+\end{figure}
+
+\newpage
+
+\section*{Figure S2: Perturbation Effects by Commitment Decile}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/figure_s2_perturbation_details.pdf}
+\caption{Detailed perturbation effects stratified by baseline commitment decile for both species and both perturbation types. Error bars show 95\% confidence intervals from bootstrap resampling. The crossover from negative to positive effect sizes around decile 4--5 marks the commitment threshold beyond which cells become resistant to reopening perturbations.}
+\label{fig:s2}
+\end{figure}
+
+\end{document}
